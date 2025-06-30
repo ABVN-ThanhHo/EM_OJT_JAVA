@@ -1,0 +1,81 @@
+@baseUrl = http://localhost:4004/odata/v4
+
+### Get all employees
+GET {{baseUrl}}/Employees
+Accept: application/json
+Authorization: Basic selina:
+
+###
+
+### Get one employees
+GET {{baseUrl}}/employee/Employees(e1111111-e111-4111-8111-e11111111111)
+Accept: application/json
+Authorization: Basic john:
+
+###
+
+### Get user login information
+GET {{baseUrl}}/employee/me
+Accept: application/json
+Authorization: Basic selina:
+
+###
+
+### Calculate Salary
+GET {{baseUrl}}/employee(e1111111-e111-4111-8111-e11111111111)/calculateSalary
+Accept: application/json
+Authorization: Basic selina:
+
+###
+
+### Create new employee
+POST {{baseUrl}}/employee/Employees
+Content-Type: application/json
+Authorization: Basic selina:
+
+{
+  "firstName": "Peter",
+  "lastName": "Tran",
+  "dateOfBirth": "2020-03-01",
+  "email": "thaho@example.com",
+  "gender": "male",
+  "hireDate": "2020-03-01",
+  "department_ID": "aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2",
+  "role_ID": "44444444-4444-4444-4444-444444444444"
+}
+
+###
+
+### Update employee's last name
+PATCH {{baseUrl}}/employee/Employees('e1111111-e111-4111-8111-e11111111111')
+Content-Type: application/json
+Authorization: Basic selina:
+
+{
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice.smith@example.com",
+  "hireDate": "2022-05-18",
+  "role_ID": "22222222-2222-2222-2222-222222222222",
+  "salary": 73000
+}
+
+###
+
+### Delete employee
+DELETE {{baseUrl}}/employee/Employees(e5555555-e555-4555-8555-e55555555555)
+Authorization: Basic selina:
+
+##############################################
+
+### Get all Department
+GET {{baseUrl}}/Departments
+Accept: application/json
+# Authorization: Basic John:
+
+##############################################
+
+### Get all Roles
+GET {{baseUrl}}/Roles
+Accept: application/json
+Authorization: Basic john:

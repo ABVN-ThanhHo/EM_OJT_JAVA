@@ -6,5 +6,62 @@
   "repository": "<Add your repository here>",
   "devDependencies": {
     "@sap/cds-dk": "^9.0.4"
+  },
+  "cds": {
+    "requires": {
+      "[development]": {
+        "auth": {
+          "kind": "basic",
+          "users": {
+            "selina": {
+              "roles": [
+                "Admin"
+              ]
+            },
+            "luna": {
+              "roles": [
+                "Admin"
+              ]
+            },
+            "haha": {
+              "roles": [
+                "Admin"
+              ]
+            },
+            "jame": {
+              "roles": [
+                "Viewer"
+              ]
+            },
+            "john": {
+              "roles": [
+                "Viewer"
+              ]
+            }
+          }
+        },
+        "db": "hana"
+      },
+      "[production]": {
+        "auth": "xsuaa",
+        "db": "hana"
+      },
+      "[hybrid]": {
+        "auth": "xsuaa",
+        "db": "hana"
+      }
+    }
+  },
+  "dependencies": {
+    "@cap-js/hana": "^2.1.1",
+    "@cap-js/sqlite": "^2.0.1",
+    "@sap/xssec": "^4.8.0",
+    "hdb": "^0.19.12",
+    "i": "^0.3.7",
+    "npm": "^11.4.2"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch": "cds watch --profile default"
   }
 }

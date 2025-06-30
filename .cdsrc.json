@@ -1,5 +1,12 @@
 {
   "requires": {
-    "db": "hana"
+    "db": "hana",
+    "[production]": {
+      "auth": "xsuaa",
+      "db": "hana"
+    },
+    "[hybrid]": {
+      "auth": "xsuaa"
+    }
   }
 }

@@ -1,0 +1,6 @@
+ID;firstName;lastName;dateOfBirth;gender;email;hireDate;salary;role_ID;department_ID
+e1111111-e111-4111-8111-e11111111111;Alice;Smith;1990-03-15;Female;alice.smith@example.com;2022-05-18;53000;11111111-1111-1111-1111-111111111111;aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaa1
+e2222222-e222-4222-8222-e22222222222;Bob;Johnson;1985-07-22;Male;bob.johnson@example.com;2021-03-10;74000;22222222-2222-2222-2222-222222222222;aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2
+e3333333-e333-4333-8333-e33333333333;Clara;Williams;1992-11-02;Female;clara.williams@example.com;2020-01-15;45000;33333333-3333-3333-3333-333333333333;aaaaaaa3-aaaa-aaaa-aaaa-aaaaaaaaaaa3
+e4444444-e444-4444-8444-e44444444444;David;Brown;1988-06-10;Male;david.brown@example.com;2019-07-01;50000;44444444-4444-4444-4444-444444444444;aaaaaaa4-aaaa-aaaa-aaaa-aaaaaaaaaaa4
+e5555555-e555-4555-8555-e55555555555;Eva;Taylor;1995-12-25;Female;eva.taylor@example.com;2023-02-20;82000;55555555-5555-5555-5555-555555555555;aaaaaaa5-aaaa-aaaa-aaaa-aaaaaaaaaaa5

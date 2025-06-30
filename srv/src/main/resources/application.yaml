@@ -1,10 +1,26 @@
-
 ---
 spring:
+  security:
+    enabled: false
   config.activate.on-profile: default
   sql.init.platform: h2
 cds:
   data-source.auto-config.enabled: false
+  persistence:
+    kind: hana
+  security:
+    enabled: true
+    mock:
+      users:
+        admin:
+          password: ""
+          roles:
+            - Admin
+        viewer:
+          password: ""
+          roles:
+            - Viewer
+
 ---
 management:
   endpoint:

@@ -1,4 +1,4 @@
-namespace com.company.hr;
+namespace my.company;
 
 entity Roles {
   key ID       : UUID;
@@ -22,4 +22,9 @@ entity Employees {
       role       : Association to Roles;
       department : Association to Departments;
       salary     : Decimal(15,2);
+}
+
+type UserInfo {
+  id    : String;
+  roles : String;
 }
