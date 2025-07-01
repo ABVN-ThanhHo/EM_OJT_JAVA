@@ -19,11 +19,11 @@
               <u:FileUploader id="fileUploader" visible="true" uploadOnChange="false" change="onUploadImage" fileType="jpg,png,jpeg" name="avatarUploader" class="hiddenUploader" />
             </VBox>
             <Label id="name11" required="true" text="{i18n>firstName}" />
-            <Input id="name111" placeholder="{i18n>firstName}" required="true" />
+            <Input id="firstNameCreate" placeholder="{i18n>firstName}" required="true" />
             <Label id="name12" required="true" text="{i18n>lastName}" />
-            <Input id="name121" placeholder="{i18n>lastName}" required="true" />
+            <Input id="lastNameCreate" placeholder="{i18n>lastName}" required="true" />
             <Label id="dob_label1" required="true" text="{i18n>dob}" />
-            <DatePicker id="dob1" change="validateDOB" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2002" editable="true" />
+            <DatePicker id="dobCreate" change="validateDOB" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2002" editable="true" />
             <Label id="gender_label1" required="true" text="{i18n>gender}" />
             <ComboBox id="gender1" required="true" placeholder="{i18n>gender}" change="onRoleChange" width="100%">
               <items>
@@ -33,23 +33,23 @@
               </items>
             </ComboBox>
             <Label id="department_label1" required="true" text="{i18n>department}" />
-            <ComboBox id="department1" placeholder="{i18n>department}" required="true" change="onRoleChange" items="{
+            <ComboBox id="departmentCreate" placeholder="{i18n>department}" required="true" change="onRoleChange" items="{
                                             path: 'MasterDataModel>/departments',
                                             sorter: { path: 'name' }
                                         }" selectedKey="{MasterDataModel>ID}">
               <core:Item id="_IDGenItem12" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
             </ComboBox>
             <Label id="wfrom_label1" required="true" text="{i18n>hireDate}" />
-            <DatePicker id="wfrom1" change="validateHireDate" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2020" value="" editable="true" />
+            <DatePicker id="hireDateCreate" change="validateHireDate" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2020" value="" editable="true" />
             <Label id="level_label1" required="true" text="{i18n>role}" />
-            <ComboBox id="role1" placeholder="{i18n>role}" required="true" change="onRoleChange" items="{
+            <ComboBox id="roleCreate" placeholder="{i18n>role}" required="true" change="onRoleChange" items="{
                                             path: 'MasterDataModel>/roles',
                                             sorter: { path: 'name' }
                                         }" selectedKey="{MasterDataModel>ID}">
               <core:Item id="_IDGenItem1" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
             </ComboBox>
             <Label id="email_label1" required="true" text="{i18n>email}" />
-            <Input id="email1" placeholder="{i18n>email}" required="true" change="onEmailChange" />
+            <Input id="emailCreate" placeholder="{i18n>email}" required="true" change="onEmailChange" />
             <VBox id="button1" width="100%" alignItems="End">
               <Button id="_IDGenButton11" text="{i18n>submit}" press="onSubmit" class="customButtonPrimary sapUiTinyMarginBegin"/>
             </VBox>

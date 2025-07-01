@@ -30,8 +30,8 @@ sap.ui.define(
   
           try {
             const [departmentsResponse, rolesResponse] = await Promise.all([
-              fetch("/odata/v4/Departments"),
-              fetch("/odata/v4/Roles"),
+              fetch("/odata/v4/odata/v4/Departments"),
+              fetch("/odata/v4/odata/v4/Roles"),
             ]);
   
             if (!departmentsResponse.ok || !rolesResponse.ok) {
@@ -98,7 +98,7 @@ sap.ui.define(
             var oModel = new JSONModel();
   
             $.ajax({
-              url: "/odata/v4/me", 
+              url: "/odata/v4/odata/v4/me()", 
               method: "GET",
               success: function (data) {
                 oModel.setData(data);

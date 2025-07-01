@@ -11,7 +11,7 @@
       <Link id="_IDGenLink" text="{i18n>title}" class="customTitleLink" press="onEmpList"/>
     </contentLeft>
     <contentRight>
-      <Button id="inputForm" text="{i18n>inputForm}" press="onInputForm" class="customButtonPrimary" visible="{= !!${userLoginModel>/roles/Admin} }"/>
+      <Button id="inputForm" text="{i18n>inputForm}" press="onInputForm" class="customButtonPrimary" visible="{= ${userLoginModel>/roles} !== 'Viewer'}"/>
       <Button id="_IDGenButton3" text="{i18n>empList}" press="onEmpList" class="customButtonPrimary sapUiTinyMarginBegin"/>
     </contentRight>
   </Bar>

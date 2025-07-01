@@ -1,6 +1,12 @@
 sap.ui.define(
-  ["sap/ui/core/mvc/Controller", "../model/models", "sap/ui/core/Fragment"],
-  function (Controller, Model, Fragment) {
+  [
+    "sap/ui/core/mvc/Controller",
+    "../model/models",
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox",
+    "sap/m/MessageToast",
+  ],
+  function (Controller, Model, Fragment, MessageBox, MessageToast) {
     "use strict";
 
     return Controller.extend("emjava.controller.DetailEmployee", {
@@ -21,7 +27,7 @@ sap.ui.define(
         const sId = oEvent.getParameter("arguments").id;
         const oODataModel = this.getOwnerComponent().getModel("EmployeeModel");
 
-        const sPath = `/Employees('${sId}')`;
+        const sPath = `/Employees(${sId})`;
 
         try {
           // Bind context and request the object from OData V4
@@ -42,11 +48,11 @@ sap.ui.define(
             this.getView().setModel(oJSONEmployee, "EmployeeDetail");
             // }
           } else {
-            sap.m.MessageToast.show("Employee not found.");
+            MessageToast.show("Employee not found.");
           }
         } catch (error) {
           console.error("Failed to load employee:", error);
-          sap.m.MessageBox.error("Error loading employee data.");
+          MessageBox.error("Error loading employee data.");
         }
       },
 
@@ -212,14 +218,14 @@ sap.ui.define(
         let bValid = true;
 
         const aFields = [
-          oView.byId("name"), // first name
-          oView.byId("name2"), // last name
-          oView.byId("gender"), // gender
-          oView.byId("dob"), // date of birth
-          oView.byId("department"), // department
-          oView.byId("hireDate"), // hire date
-          oView.byId("role"), // role
-          oView.byId("email"), // email
+          oView.byId("firstNameUpdate"), // first name
+          oView.byId("lastNameUpdate"), // last name
+          oView.byId("genderUpdate"), // gender
+          oView.byId("dobUpdate"), // date of birth
+          oView.byId("departmentUpdate"), // department
+          oView.byId("hireDateUpdate"), // hire date
+          oView.byId("roleUpdate"), // role
+          oView.byId("emailUpdate"), // email
         ];
 
         aFields.forEach(function (oField) {
@@ -261,7 +267,7 @@ sap.ui.define(
 
       // Check email exists
       onValidateEmail: async function () {
-        const sEmail = this.byId("email").getValue().trim();
+        const sEmail = this.byId("emailUpdate").getValue().trim();
         const oEmployeeDetail = this.getView().getModel("EmployeeDetail");
         const sCurrentEmpID = oEmployeeDetail.getProperty("/ID");
         const oModel = this.getOwnerComponent().getModel("EmployeeModel");
@@ -280,19 +286,19 @@ sap.ui.define(
           });
 
           if (bExists) {
-            this.byId("email").setValueState("Error");
-            this.byId("email").setValueStateText("This email already exists.");
-            sap.m.MessageToast.show("This email already exists.");
+            this.byId("emailUpdate").setValueState("Error");
+            this.byId("emailUpdate").setValueStateText("This email already exists.");
+            MessageToast.show("This email already exists.");
             emailExists = false;
             return emailExists;
           } else {
-            this.byId("email").setValueState("None");
+            this.byId("emailUpdate").setValueState("None");
             emailExists = true;
             return emailExists;
           }
         } catch (err) {
           console.error("Failed to read employees", err);
-          sap.m.MessageToast.show("Failed to check existing emails.");
+          MessageToast.show("Failed to check existing emails.");
           emailExists = false;
           return emailExists;
         }
@@ -306,34 +312,34 @@ sap.ui.define(
         const bValid = this._validateRequiredFields();
 
         if (!bValid) {
-          sap.m.MessageToast.show("Please fill all required fields.");
+          MessageToast.show("Please fill all required fields.");
           return;
         }
 
         // Validate Dob field
         if (!this._validateDobCheck) {
-          sap.m.MessageToast.show("Invalid Date of Birth field.");
+          MessageToast.show("Invalid Date of Birth field.");
           return;
         }
 
         // Validate HireDate field
         if (!this._validateHireCheck) {
-          sap.m.MessageToast.show("Invalid Hire Date field.");
+          MessageToast.show("Invalid Hire Date field.");
           return;
         }
 
         // Check email
-        const sEmail = oView.byId("email").getValue().trim();
+        const sEmail = oView.byId("emailUpdate").getValue().trim();
         const bValidEmail = this._validateEmail(sEmail);
 
         if (!bValidEmail) {
-          const oEmailField = oView.byId("email");
+          const oEmailField = oView.byId("emailUpdate");
           oEmailField.setValueState("Error");
           oEmailField.setValueStateText("Please enter a valid email address.");
-          sap.m.MessageToast.show("Please enter a valid email address.");
+          MessageToast.show("Please enter a valid email address.");
           return;
         } else {
-          oView.byId("email").setValueState("None");
+          oView.byId("emailUpdate").setValueState("None");
         }
 
         // Check email exist
@@ -411,6 +417,11 @@ sap.ui.define(
         delete oData.modifiedAt;
         delete oData.modifiedBy;
 
+        // Convert salary
+        if (oData.salary) {
+          oData.salary = parseFloat(oData.salary);
+        }
+
         // Convert dates to valid ISO format (YYYY-MM-DD)
         if (oData.dateOfBirth) {
           const dob = new Date(oData.dateOfBirth);
@@ -431,8 +442,10 @@ sap.ui.define(
         }
 
         try {
-          // Use correct OData format
-          const sUrl = `/odata/v4/employee/Employees('${sEmployeeID}')`;
+          // Get service root URL from model
+          const oModel = oView.getModel("EmployeeModel");
+          const sServiceUrl = oModel.sServiceUrl;
+          const sUrl = `${sServiceUrl}Employees(${sEmployeeID})`;
 
           const response = await fetch(sUrl, {
             method: "PATCH",
@@ -447,7 +460,7 @@ sap.ui.define(
             throw new Error(`Update failed (${response.status}): ${errorText}`);
           }
 
-          sap.m.MessageToast.show("Employee updated successfully");
+          MessageToast.show("Employee updated successfully");
 
           // Refresh table if it's accessible
           const oTable = sap.ui
@@ -459,7 +472,7 @@ sap.ui.define(
           }
         } catch (err) {
           console.error("Failed to update employee:", err);
-          sap.m.MessageBox.error(
+          MessageBox.error(
             "Failed to update employee:\n" + (err.message || "")
           );
         }
@@ -485,14 +498,14 @@ sap.ui.define(
       _setInputsEditable: function (bEditable) {
         const oView = this.getView();
         [
-          "name",
-          "name2",
-          "dob",
-          "gender",
-          "department",
-          "hireDate",
-          "role",
-          "email",
+          "firstNameUpdate",
+          "lastNameUpdate",
+          "dobUpdate",
+          "genderUpdate",
+          "departmentUpdate",
+          "hireDateUpdate",
+          "roleUpdate",
+          "emailUpdate",
         ].forEach((id) => {
           const oControl = oView.byId(id);
           if (oControl && oControl.setEditable) {
@@ -515,7 +528,7 @@ sap.ui.define(
         try {
           const oView = this.getView();
           const oModel = oView.getModel("EmployeeModel");
-          const sPath = `/Employees('${sEmployeeID}')`;
+          const sPath = `/Employees(${sEmployeeID})`;
 
           // Create a context binding and request the object
           const oContextBinding = oModel.bindContext(sPath);
@@ -525,7 +538,7 @@ sap.ui.define(
           oView.getModel("EmployeeDetail").setData(oContext);
         } catch (oError) {
           console.error("Failed to refresh employee details", oError);
-          sap.m.MessageBox.error("Failed to refresh employee details.");
+          MessageBox.error("Failed to refresh employee details.");
         }
       },
 
@@ -549,7 +562,7 @@ sap.ui.define(
 
         if (bMatchFound) {
           oComboBox.setValueState("None");
-          oComboBox.setSelectedKey(sMatchedKey); // update the selectedKey if needed
+          oComboBox.setSelectedKey(sMatchedKey); 
         } else {
           oComboBox.setValueState("Error");
           oComboBox.setValueStateText(
@@ -560,49 +573,60 @@ sap.ui.define(
       },
 
       // Calculate Salary
-      onCalculateSalary: function () {
+      onCalculateSalary: async function () {
         const oView = this.getView();
-        const oComboBox = oView.byId("role");
-        const oDatePicker = oView.byId("hireDate");
+        const oComboBox = oView.byId("roleUpdate");
+        const oDatePicker = oView.byId("hireDateUpdate");
 
         const sSelectedRoleId = oComboBox.getSelectedKey();
         const oHireDate = oDatePicker.getDateValue(); // JS Date object
 
         if (!sSelectedRoleId || !oHireDate) {
-          sap.m.MessageBox.information("Please select a role and hire date.");
+          MessageBox.information("Please select a role and hire date.");
           return;
         }
 
-        const oRoles = this.getView()
-          .getModel("MasterDataModel")
-          .getProperty("/roles");
+        // Format date to 'YYYY-MM-DD'
+        const sFormattedDate = oHireDate.toISOString().split("T")[0];
 
-        // Find the selected role by ID
-        const oSelectedRole = oRoles.find(
-          (role) => role.ID === sSelectedRoleId
-        );
-        if (!oSelectedRole) {
-          sap.m.MessageBox.information("Selected role not found.");
-          return;
+        // Get OData base service URL
+        const oModel = this.getView().getModel("EmployeeModel");
+        const sServiceUrl = oModel.sServiceUrl; 
+
+        // Build full request URL
+        const sUrl = `${sServiceUrl}calculateSalary?role=${sSelectedRoleId}&hireDate=${sFormattedDate}`;
+
+        try {
+          const oResponse = await fetch(sUrl, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+            credentials: "include", // include cookies (for session auth)
+          });
+
+          if (!oResponse.ok) {
+            throw new Error(
+              `HTTP ${oResponse.status} - ${oResponse.statusText}`
+            );
+          }
+
+          const oResult = await oResponse.json(); 
+
+          if (oResult?.value !== undefined) {
+            const oEmployeeModel = oView.getModel("EmployeeDetail");
+            oEmployeeModel.setProperty(
+              "/salary",
+              parseFloat(oResult.value).toFixed(2)
+            );
+            MessageToast.show("Salary calculated successfully.");
+          } else {
+            throw new Error("No value returned from salary function.");
+          }
+        } catch (err) {
+          console.error("Error during fetch of calculateSalary:", err);
+          MessageBox.error("Failed to calculate salary: " + err.message);
         }
-
-        const baseSalary = parseFloat(oSelectedRole.baseSalary || 0);
-        const today = new Date();
-        let years = today.getFullYear() - oHireDate.getFullYear();
-
-        // Adjust for month/day
-        const monthDiff = today.getMonth() - oHireDate.getMonth();
-        const dayDiff = today.getDate() - oHireDate.getDate();
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-          years--;
-        }
-
-        const bonus = years * 1000;
-        const totalSalary = baseSalary + bonus;
-
-        // Update EmployeeDetail model
-        const oEmployeeModel = this.getView().getModel("EmployeeDetail");
-        oEmployeeModel.setProperty("/salary", totalSalary.toFixed(2));
       },
     });
   }

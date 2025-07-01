@@ -10,7 +10,7 @@ Authorization: Basic admin:
 ### Get one employees
 GET {{baseUrl}}/Employees(e5555555-e555-4555-8555-e55555555555)
 Accept: application/json
-Authorization: Basic john:
+Authorization: Basic admin:
 
 ###
 
@@ -20,44 +20,38 @@ Accept: application/json
 Authorization: Basic viewer:
 
 ### Calculate Salary
-GET {{baseUrl}}/calculateSalary?empID=e2222222-e222-4222-8222-e22222222222
+GET {{baseUrl}}/calculateSalary?role=55555555-5555-5555-5555-555555555555&hireDate=2022-05-17
 Accept: application/json
-Authorization: Basic admin:
-
-###
-
-### Calculate Salary
-GET {{baseUrl}}/employee(e1111111-e111-4111-8111-e11111111111)/calculateSalary
-Accept: application/json
-Authorization: Basic selina:
+Authorization: Basic viewer:
 
 ###
 
 ### Create new employee
 POST {{baseUrl}}/Employees
 Content-Type: application/json
-Authorization: Basic selina:
+Authorization: Basic admin:
 
 {
-  "firstName": "Peter",
-  "lastName": "Tran",
-  "dateOfBirth": "2020-03-01",
-  "email": "thaho@example.com",
-  "gender": "male",
-  "hireDate": "2020-03-01",
-  "department_ID": "aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2",
-  "role_ID": "44444444-4444-4444-4444-444444444444"
+  "firstName": "Lavy",
+  "lastName": "Nguyen",
+  "dateOfBirth": "1999-07-20",
+  "email": "lavy@gmail.com",
+  "gender": "female",
+  "hireDate": "2016-07-11",
+  "department_ID": "aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaa1",
+  "role_ID": "55555555-5555-5555-5555-555555555555",
+  "salary": 88000
 }
 
 ###
 
-### Update employee's last name
-PATCH {{baseUrl}}/employee/Employees('e1111111-e111-4111-8111-e11111111111')
+### Update employee
+PATCH {{baseUrl}}/Employees(e5555555-e555-4555-8555-e55555555555)
 Content-Type: application/json
-Authorization: Basic selina:
+Authorization: Basic admin:
 
 {
-  "firstName": "Alice",
+  "firstName": "hahaha",
   "lastName": "Smith",
   "email": "alice.smith@example.com",
   "hireDate": "2022-05-18",
@@ -68,19 +62,19 @@ Authorization: Basic selina:
 ###
 
 ### Delete employee
-DELETE {{baseUrl}}/employee/Employees(e5555555-e555-4555-8555-e55555555555)
-Authorization: Basic selina:
+DELETE {{baseUrl}}/Employees(e5555555-e555-4555-8555-e55555555555)
+Authorization: Basic admin:
 
 ##############################################
 
 ### Get all Department
 GET {{baseUrl}}/Departments
 Accept: application/json
-# Authorization: Basic John:
+Authorization: Basic admin:
 
 ##############################################
 
 ### Get all Roles
 GET {{baseUrl}}/Roles
 Accept: application/json
-Authorization: Basic john:
+Authorization: Basic viewer:

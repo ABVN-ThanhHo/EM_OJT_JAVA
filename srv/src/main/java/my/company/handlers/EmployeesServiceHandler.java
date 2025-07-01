@@ -34,38 +34,22 @@ public class EmployeesServiceHandler implements EventHandler {
 
     @On(event = "calculateSalary")
     public void calculateSalary(CalculateSalaryContext context) {
-        // Get employee ID from context
-        String empID = context.getEmpID();
-        if (empID == null || empID.isEmpty()) {
-            throw new IllegalArgumentException("Employee ID must not be null or empty.");
+        String roleId = context.getRole(); // Received from caller
+        LocalDate hireDate = context.getHireDate(); // Received from caller
+
+        // Validate input
+        if (roleId == null || roleId.isEmpty()) {
+            throw new IllegalArgumentException("Role ID must not be null or empty.");
         }
-
-        // Fetch employee's hireDate and role_ID using string paths
-        Select employeeQuery = Select.from("my.company.Employees")
-                .columns("hireDate", "role_ID")
-                .byId(empID);
-
-        Row employee = db.run(employeeQuery).single();
-        if (employee == null) {
-            throw new RuntimeException("Employee not found with ID: " + empID);
+        if (hireDate == null) {
+            throw new IllegalArgumentException("Hire date must not be null.");
         }
-
-        LocalDate hireDate;
-        Object hireDateRaw = employee.get("hireDate");
-        if (hireDateRaw instanceof java.sql.Date) {
-            hireDate = ((java.sql.Date) hireDateRaw).toLocalDate();
-        } else if (hireDateRaw instanceof LocalDate) {
-            hireDate = (LocalDate) hireDateRaw;
-        } else {
-            throw new RuntimeException("Unexpected hireDate format for employee: " + empID);
-        }
-
-        String roleId = (String) employee.get("role_ID");
 
         // Calculate years of service
         int yearsOfService = Period.between(hireDate, LocalDate.now()).getYears();
+        logger.info("Years of service: " + yearsOfService);
 
-        // Fetch baseSalary from Roles
+        // Fetch baseSalary from Roles entity
         Select roleQuery = Select.from("my.company.Roles")
                 .columns("baseSalary")
                 .byId(roleId);
@@ -77,16 +61,16 @@ public class EmployeesServiceHandler implements EventHandler {
 
         BigDecimal baseSalary = (BigDecimal) role.get("baseSalary");
 
-        // Calculate bonus: $1,000 per year of service
+        // Calculate bonus: $1000 per year of service
         BigDecimal bonus = BigDecimal.valueOf(1000L).multiply(BigDecimal.valueOf(yearsOfService));
-
         BigDecimal totalSalary = baseSalary.add(bonus);
 
-        // Set result
+        // Set the result
         context.setResult(totalSalary);
 
-        logger.info("Salary calculation completed for employee ID " + empID +
-                " | Base: " + baseSalary +
+        logger.info("Salary calculation completed | Role: " + roleId +
+                " | HireDate: " + hireDate +
+                " | BaseSalary: " + baseSalary +
                 " | Bonus: " + bonus +
                 " | Total: " + totalSalary);
     }

@@ -38,7 +38,7 @@ service EmployeeService @(path: '/odata/v4') {
         };
 
     // Calculate Salary
-    function calculateSalary(empID : UUID) returns Decimal(15, 2);
+    function calculateSalary(role : UUID, hireDate : Date) returns Decimal(15, 2);
     // Get user login information
     function me()                          returns db.UserInfo;
 }
