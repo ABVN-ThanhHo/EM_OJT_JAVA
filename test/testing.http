@@ -1,23 +1,28 @@
-@baseUrl = http://localhost:4004/odata/v4
+@baseUrl = http://localhost:8080/odata/v4/odata/v4
 
 ### Get all employees
 GET {{baseUrl}}/Employees
 Accept: application/json
-Authorization: Basic selina:
+Authorization: Basic admin:
 
 ###
 
 ### Get one employees
-GET {{baseUrl}}/employee/Employees(e1111111-e111-4111-8111-e11111111111)
+GET {{baseUrl}}/Employees(e5555555-e555-4555-8555-e55555555555)
 Accept: application/json
 Authorization: Basic john:
 
 ###
 
 ### Get user login information
-GET {{baseUrl}}/employee/me
+GET {{baseUrl}}/me()
 Accept: application/json
-Authorization: Basic selina:
+Authorization: Basic viewer:
+
+### Calculate Salary
+GET {{baseUrl}}/calculateSalary?empID=e2222222-e222-4222-8222-e22222222222
+Accept: application/json
+Authorization: Basic admin:
 
 ###
 
@@ -29,7 +34,7 @@ Authorization: Basic selina:
 ###
 
 ### Create new employee
-POST {{baseUrl}}/employee/Employees
+POST {{baseUrl}}/Employees
 Content-Type: application/json
 Authorization: Basic selina:
 

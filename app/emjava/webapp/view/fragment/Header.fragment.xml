@@ -1,0 +1,19 @@
+<core:FragmentDefinition controllerName="emjava.controller.OverviewPage"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core">
+  <Bar id="_IDGenBar" class="headerBox">
+    <contentLeft>
+      <Image id="_IDGenImage" src="img/Logo.png" class="circularLogo"/>
+      <Link id="_IDGenLink" text="{i18n>title}" class="customTitleLink" press="onEmpList"/>
+    </contentLeft>
+    <contentRight>
+      <Button id="inputForm" text="{i18n>inputForm}" press="onInputForm" class="customButtonPrimary" visible="{= !!${userLoginModel>/roles/Admin} }"/>
+      <Button id="_IDGenButton3" text="{i18n>empList}" press="onEmpList" class="customButtonPrimary sapUiTinyMarginBegin"/>
+    </contentRight>
+  </Bar>
+
+</core:FragmentDefinition>

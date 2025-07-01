@@ -1,6 +1,5 @@
 {
   "requires": {
-    "db": "hana",
     "[production]": {
       "auth": "xsuaa",
       "db": "hana"

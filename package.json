@@ -5,7 +5,9 @@
   "license": "ISC",
   "repository": "<Add your repository here>",
   "devDependencies": {
-    "@sap/cds-dk": "^9.0.4"
+    "@sap/cds-dk": "^9.0.4",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
   },
   "cds": {
     "requires": {
@@ -39,8 +41,7 @@
               ]
             }
           }
-        },
-        "db": "hana"
+        }
       },
       "[production]": {
         "auth": "xsuaa",
@@ -62,6 +63,9 @@
   },
   "scripts": {
     "start": "cds run",
-    "watch": "cds watch --profile default"
+    "watch": "cds watch --profile default",
+    "undeploy": "cf undeploy employeemanagement_Java --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   }
 }
