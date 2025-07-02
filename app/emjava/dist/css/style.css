@@ -1,0 +1,189 @@
+/* Enter your custom styles here */
+
+.Page {
+    background-color: #ffdac1;
+  }
+  
+  .responsiveVBox {
+    width: 30%; /* Default: XL */
+  }
+  
+  .tableHeader {
+    padding-left: 0 !important;
+  }
+  
+  .colorText {
+    color: #f57786 !important;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .headerBox {
+    justify-content: center;
+    padding: 0.5rem 0;
+    background-color: #ffb7b2 !important; /* Dark blue, change as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional drop shadow */
+  }
+  
+  /* Button styles */
+  .customButtonPrimary .sapMBtnInner {
+    background-color: #ff9aa2 !important; /* Boldest tone */
+    color: white !important;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+  }
+  
+  .customButtonPrimary .sapMBtnInner:hover {
+    background-color: #ff7e8c;
+  }
+  
+  .customButtonSecondary .sapMBtnInner {
+    background-color: #ffb7b2 !important;
+    color: white !important;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+  }
+  
+  .customButtonSecondary .sapMBtnInner:hover {
+    background-color: #ffa5a1;
+  }
+  
+  .circularLogo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  
+  .certification {
+    padding-right: 15px;
+  }
+  
+  .content {
+    padding-top: 50px;
+    padding-bottom: 25px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .hiddenUploader {
+    display: none !important;
+  }
+  
+  .responsiveTableWrapperHorizontal {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table{
+    width: 100%;
+  }
+  
+  .clickableAvatar {
+    cursor: pointer;
+  }
+  
+  .buttonText {
+    color: #66fcf1 !important;
+    z-index: 1;
+  }
+  
+  .notFoundWrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .filterInput {
+    width: 12rem;
+  }
+  
+  /* L - Small Desktop */
+  @media (max-width: 1440px) {
+    .responsiveVBox {
+      width: 40%;
+    }
+  }
+  
+  /* M - Tablet */
+  @media (max-width: 1024px) {
+    .responsiveVBox {
+      width: 60%;
+    }
+  
+    .customTitleLink {
+      text-decoration: none !important;
+      background-color: transparent !important;
+      color: #f57786 !important;
+      font-size: 1rem !important;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+  
+    .table{
+      width: 830px !important;
+    }
+  
+    .customButtonPrimary .sapMBtnInner {
+      background-color: #ff9aa2 !important; /* Boldest tone */
+      color: white !important;
+      font-size: 0.7rem !important;
+      font-weight: bold;
+      border: none;
+    }
+  
+    .customButtonPrimary .sapMBtnInner:hover {
+      background-color: #ff7e8c;
+    }
+  }
+  
+  /* S - Phone */
+  @media (max-width: 600px) {
+    .responsiveVBox {
+      width: 80%;
+    }
+  
+    .filterInput {
+      width: 6rem;
+    }
+  
+    .customTitleLink {
+      display: none !important;
+      text-decoration: none !important;
+      background-color: transparent !important;
+      color: #f57786 !important;
+      font-size: 1rem !important;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+  }
+  
+  .customTitleLink {
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #f57786 !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  
+  /* Optional: Prevent underline on hover/focus */
+  .customTitleLink:hover,
+  .customTitleLink:focus {
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #f57786 !important;
+  }
+  

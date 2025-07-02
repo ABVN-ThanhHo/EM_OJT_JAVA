@@ -42,6 +42,7 @@ modules:
       forwardAuthToken: false
       name: ui5
       url: https://ui5.sap.com
+  - name: employeemanagement_Java-html5-runtime
   provides:
   - name: app-api
     properties:
@@ -107,6 +108,11 @@ resources:
   parameters:
     service: hana
     service-plan: hdi-shared
+- name: employeemanagement_Java-html5-runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
 - name: employeemanagement_Java-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
