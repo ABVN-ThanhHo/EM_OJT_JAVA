@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("emjava.controller.NotFound",{onNavHome:function(){this.getOwnerComponent().getRouter().navTo("OverviewPage")}})});
+//# sourceMappingURL=NotFound.controller.js.map

@@ -1,0 +1,36 @@
+{
+  "xsappname": "employeeManagement",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "Read only"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Full access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "scope-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    },
+    {
+      "name": "Admin",
+      "scope-references": [
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.applicationstudio.cloud.sap/**",
+      "https://*.hana.ondemand.com/**"
+    ]
+  },
+  "attributes": [],
+  "authorities-inheritance": false
+}

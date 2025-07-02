@@ -1,0 +1,61 @@
+<mvc:View controllerName="emjava.controller.CreateEmployee"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core">
+  <Page id="_IDGenPage1" title="Create Employee" class="Page">
+    <customHeader>
+      <core:Fragment fragmentName="emjava.view.fragment.Header" type="XML" />
+    </customHeader>
+    <content>
+      <HBox id="_IDGenHBox1" class="content">
+        <VBox id="_IDGenVBox4" class="responsiveVBox">
+          <f:SimpleForm id="form1" title="{i18n>empList}">
+            <VBox id="_IDGenVBox11" alignItems="Center">
+              <Avatar id="avatar" displayShape="Circle" displaySize="L" fallbackIcon="sap-icon://employee" press="onAvatarPress" class="clickableAvatar" />
+              <Button id="btnDeleteImage" icon="sap-icon://decline" type="Transparent" press="onDeleteImage" />
+              <u:FileUploader id="fileUploader" visible="true" uploadOnChange="false" change="onUploadImage" fileType="jpg,png,jpeg" name="avatarUploader" class="hiddenUploader" />
+            </VBox>
+            <Label id="name11" required="true" text="{i18n>firstName}" />
+            <Input id="firstNameCreate" placeholder="{i18n>firstName}" required="true" />
+            <Label id="name12" required="true" text="{i18n>lastName}" />
+            <Input id="lastNameCreate" placeholder="{i18n>lastName}" required="true" />
+            <Label id="dob_label1" required="true" text="{i18n>dob}" />
+            <DatePicker id="dobCreate" change="validateDOB" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2002" editable="true" />
+            <Label id="gender_label1" required="true" text="{i18n>gender}" />
+            <ComboBox id="gender1" required="true" placeholder="{i18n>gender}" change="onRoleChange" width="100%">
+              <items>
+                <core:Item id="_IDGenItem3" key="male" text="{i18n>Male}"/>
+                <core:Item id="_IDGenItem4" key="female" text="{i18n>Female}"/>
+                <core:Item id="_IDGenItem5" key="other" text="{i18n>Other}"/>
+              </items>
+            </ComboBox>
+            <Label id="department_label1" required="true" text="{i18n>department}" />
+            <ComboBox id="departmentCreate" placeholder="{i18n>department}" required="true" change="onRoleChange" items="{
+                                            path: 'MasterDataModel>/departments',
+                                            sorter: { path: 'name' }
+                                        }" selectedKey="{MasterDataModel>ID}">
+              <core:Item id="_IDGenItem12" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
+            </ComboBox>
+            <Label id="wfrom_label1" required="true" text="{i18n>hireDate}" />
+            <DatePicker id="hireDateCreate" change="validateHireDate" displayFormat="yyy-MM-dd" valueFormat="yyy-MM-dd" placeholder="e.g. 25-12-2020" value="" editable="true" />
+            <Label id="level_label1" required="true" text="{i18n>role}" />
+            <ComboBox id="roleCreate" placeholder="{i18n>role}" required="true" change="onRoleChange" items="{
+                                            path: 'MasterDataModel>/roles',
+                                            sorter: { path: 'name' }
+                                        }" selectedKey="{MasterDataModel>ID}">
+              <core:Item id="_IDGenItem1" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
+            </ComboBox>
+            <Label id="email_label1" required="true" text="{i18n>email}" />
+            <Input id="emailCreate" placeholder="{i18n>email}" required="true" change="onEmailChange" />
+            <VBox id="button1" width="100%" alignItems="End">
+              <Button id="_IDGenButton11" text="{i18n>submit}" press="onSubmit" class="customButtonPrimary sapUiTinyMarginBegin"/>
+            </VBox>
+          </f:SimpleForm>
+        </VBox>
+      </HBox>
+    </content>
+  </Page>
+</mvc:View>

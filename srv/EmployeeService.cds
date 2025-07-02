@@ -1,4 +1,4 @@
-using com.company.hr as db from '../../../../db/schema';
+using my.company as db from '../db/schema';
 
 service EmployeeService @(path: '/odata/v4') {
 
@@ -38,11 +38,7 @@ service EmployeeService @(path: '/odata/v4') {
         };
 
     // Calculate Salary
-    function calculateSalary(empID : UUID) returns Decimal(15, 2);
-
+    function calculateSalary(role : UUID, hireDate : Date) returns Decimal(15, 2);
     // Get user login information
-    function me()                          returns {
-        id    : String;
-        roles : many String;
-    };
+    function me()                          returns db.UserInfo;
 }

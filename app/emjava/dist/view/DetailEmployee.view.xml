@@ -1,0 +1,72 @@
+<mvc:View controllerName="emjava.controller.DetailEmployee"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core"
+  xmlns:upload="sap.m.upload">
+  <Page id="_IDGenPage" title="Detail Employee" class="Page">
+    <customHeader>
+      <core:Fragment fragmentName="emjava.view.fragment.Header" type="XML" />
+    </customHeader>
+    <content>
+      <HBox class="content">
+        <VBox class="responsiveVBox">
+          <f:SimpleForm id="form" title="{i18n>empList}">
+            <VBox id="_IDGenVBox9" alignItems="Center">
+              <Avatar id="uploadAvatar" displayShape="Circle" displaySize="L" initials="AU" class="sapUiSmallMarginEnd" src="img/Avatar.png"/>
+            </VBox>
+            <Label id="name1" required="true" text="{i18n>firstName}" />
+            <Input id="firstNameUpdate" required="true" placeholder="Name" editable="false" value="{EmployeeDetail>/firstName}" />
+            <Label id="name13" required="true" text="{i18n>lastName}" />
+            <Input id="lastNameUpdate" required="true" placeholder="Name" editable="false" value="{EmployeeDetail>/lastName}" />
+            <Label id="dob_label" required="true" text="{i18n>dob}" />
+            <DatePicker id="dobUpdate" required="true" change="validateDOB" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" editable="false" value="{EmployeeDetail>/dateOfBirth}" />
+            <Label id="gender_label" required="true" text="{i18n>gender}" />
+            <ComboBox id="genderUpdate" required="true" editable="false" width="100%" change="onRoleChange" value="{EmployeeDetail>/gender}" selectedKey="{EmployeeDetail>/gender}">
+              <items>
+                <core:Item id="_IDGenItem13" key="male" text="{i18n>Male}"/>
+                <core:Item id="_IDGenItem14" key="female" text="{i18n>Female}"/>
+                <core:Item id="_IDGenItem15" key="other" text="{i18n>Other}"/>
+              </items>
+            </ComboBox>
+            <Label id="department_label" required="true" text="{i18n>department}" />
+            <ComboBox id="departmentUpdate" editable="false" required="true" change="onRoleChange" value="{EmployeeDetail>/departmentName}" items="{
+                                            path: 'MasterDataModel>/departments',
+                                            sorter: { path: 'name' }
+                                        }" selectedKey="{EmployeeDetail>/department_ID}">
+              <core:Item id="_IDGenItem122" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
+            </ComboBox>
+            <Label id="wfrom_label" required="true" text="{i18n>hireDate}" />
+            <DatePicker id="hireDateUpdate" required="true" change="validateHireDate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" editable="false" value="{EmployeeDetail>/hireDate}" />
+            <HBox id="_IDGenHBox3" width="100%" justifyContent="SpaceBetween">
+              <VBox id="_IDGenVBox6" width="80%">
+                <Label id="role_label" required="true" text="{i18n>role}" />
+                <ComboBox id="roleUpdate" width="100%" editable="false" required="true" value="{EmployeeDetail>/roleName}" change="onRoleChange" items="{
+                                            path: 'MasterDataModel>/roles',
+                                            sorter: { path: 'name' }
+                                        }" selectedKey="{EmployeeDetail>/role_ID}">
+                  <core:Item id="_IDGenItem31" key="{MasterDataModel>ID}" text="{MasterDataModel>name}" />
+                </ComboBox>
+              </VBox>
+              <VBox id="_IDGenVBox5">
+                <Label id="cal_label" text="" />
+                <Button id="btnCalculateSalary" text="{i18n>calSalary}" class="customButtonPrimary sapUiTinyMarginBegin" enabled="false" press="onCalculateSalary" visible="true"/>
+              </VBox>
+            </HBox>
+            <Label id="salary_label" text="{i18n>salary}" />
+            <Input id="salary" editable="false" value="{= '$' + ${EmployeeDetail>/salary} }" />
+            <Label id="email_label" required="true" text="{i18n>email}" />
+            <Input id="emailUpdate" required="true" editable="false" value="{EmployeeDetail>/email}" change="onEmailChange"/>
+            <HBox id="button" width="100%" justifyContent="End">
+              <Button id="btnEdit" text="{i18n>edit}" class="customButtonPrimary" press="onEditPress" visible="true"/>
+              <Button id="btnUpdate" text="{i18n>update}" class="customButtonPrimary sapUiTinyMarginEnd" press="onUpdatePress" visible="false"/>
+              <Button id="btnCancel" text="{i18n>cancel}" class="customButtonPrimary" press="onCancelPress" visible="false"/>
+            </HBox>
+          </f:SimpleForm>
+        </VBox>
+      </HBox>
+    </content>
+  </Page>
+</mvc:View>

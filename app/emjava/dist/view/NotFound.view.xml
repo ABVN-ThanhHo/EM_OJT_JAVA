@@ -1,0 +1,15 @@
+<mvc:View controllerName="emjava.controller.NotFound"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page id="_IDGenPage3" showHeader="false" class="Page">
+    <content>
+      <VBox id="_IDGenVBox8" class="notFoundWrapper" alignItems="Center" justifyContent="Center" width="100%">
+        <core:Icon id="_IDGenIcon" src="sap-icon://error" size="4rem" color="#ff7e8c" class="sapUiTinyMarginBottom" />
+        <Title id="_IDGenTitle3" text="{i18n>notF}" level="H1" />
+        <Text id="_IDGenText4" text="{i18n>notFoundMessage}" class="sapUiSmallMarginBottom" />
+        <Button id="_IDGenButton" text="{i18n>backHome}" class="customButtonPrimary" press="onNavHome" />
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>
